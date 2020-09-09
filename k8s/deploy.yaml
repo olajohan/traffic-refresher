@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traffic-refresher-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traffic-refresher
+  template:
+    metadata:
+      labels:
+        app: traffic-refresher
+    spec:
+      containers:
+      - name: traffic-refresher
+        image: gcr.io/aurora-alarm/traffic-refresher
+        env:
+          - name: DATEX_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: datex-secret
+                key: username
+          - name: DATEX_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: datex-secret
+                key: password
+        volumeMounts:
+          - name: secrets
+            mountPath: "/secrets/"
+            readOnly: true
+      volumes:
+        - name: secrets
+          secret:
+            secretName: service-account-secret
+            items:
+              - key: service-account
+                path: gcloud-service-account
+
+
+
+
