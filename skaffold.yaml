@@ -3,6 +3,8 @@ kind: Config
 metadata:
   name: traffic-refresher
 build:
+  tagPolicy:
+    gitCommit: {}
   artifacts:
   - image: gcr.io/aurora-alarm/traffic-refresher
     context: .
