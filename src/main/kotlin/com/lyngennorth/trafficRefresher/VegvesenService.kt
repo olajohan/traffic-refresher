@@ -1,6 +1,6 @@
 package com.lyngennorth.trafficRefresher
 
-import eu.datex.v220.D2LogicalModel
+import eu.datex2.schema._2._2_0.D2LogicalModel
 import org.springframework.boot.web.client.RestTemplateBuilder
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
