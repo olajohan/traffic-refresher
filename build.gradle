@@ -10,10 +10,6 @@ plugins {
 group 'com.lyngennorth'
 version '1.0'
 
-application {
-    mainClass = 'com.lyngennorth.trafficRefresher.TrafficRefresherApplicationKt'
-}
-
 repositories {
     mavenCentral()
     jcenter()
