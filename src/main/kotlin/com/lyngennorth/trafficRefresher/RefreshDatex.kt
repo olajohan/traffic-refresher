@@ -7,6 +7,7 @@ import kotlinx.coroutines.runBlocking
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.scheduling.annotation.Scheduled
 import org.springframework.stereotype.Component
+import java.time.Instant
 
 @Component
 class RefreshDatex {
@@ -104,7 +105,8 @@ class RefreshDatex {
 
                         print(message)
                         situationReference.set(mapOf(
-                            "overallSeverity" to situation.overallSeverity.name
+                            "overallSeverity" to situation.overallSeverity.name,
+                            "lastUpdate" to Instant.now().epochSecond
                         ))
                         situationReference.collection("situationRecords").document(situationRecord.id).set(
                             mapOf(
