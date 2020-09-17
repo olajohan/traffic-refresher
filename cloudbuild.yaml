@@ -30,7 +30,7 @@ steps:
       - jib
 
       # Sets the target image reference to push to.
-      - --image=gcr.io/aurora-alarm/${_IMAGE_NAME}:production
+      - --image=gcr.io/aurora-alarm/traffic-refresher:production
 
     volumes:
       - name: user.home
@@ -40,6 +40,6 @@ steps:
     args:
       - run
       - --filename=${_K8S_YAML_PATH}
-      - --image=gcr.io/aurora-alarm/${_IMAGE_NAME}:production
+      - --image=gcr.io/aurora-alarm/traffic-refresher:production
       - --location=${_GKE_LOCATION}
       - --cluster=${_GKE_CLUSTER}
