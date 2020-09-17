@@ -39,7 +39,7 @@ steps:
   - name: "gcr.io/cloud-builders/gke-deploy"
     args:
       - run
-      - --filename=/k8s/deploy.yaml
+      - --filename=k8s/deploy.yaml
       - --image=gcr.io/aurora-alarm/traffic-refresher:production
       - --location=${_GKE_LOCATION}
       - --cluster=${_GKE_CLUSTER}
