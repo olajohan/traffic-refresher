@@ -23,6 +23,9 @@ class RefreshDatex {
 
     @Scheduled(fixedDelay = 1200_000L, initialDelay = 5000L) // 20 minutes = 1200_000 milli
     fun refreshDatex() {
+
+        val situationRecordList = mutableListOf<FirestoreTrafficSituationRecord>()
+
         val d2LogicalModel = vegvesenService.getUpdate()
         if (d2LogicalModel != null) {
 
@@ -104,24 +107,23 @@ class RefreshDatex {
                         """.trimIndent()
 
                         print(message)
-                        situationReference.set(mapOf(
-                            "overallSeverity" to situation.overallSeverity.name,
-                            "lastUpdate" to Instant.now().epochSecond
-                        ))
-                        situationReference.collection("situationRecords").document(situationRecord.id).set(
-                            mapOf(
-                                "header" to header,
-                                "overallStartTime" to overallStartTime,
-                                "overallEndTime" to overallEndTime,
-                                "iconType" to iconType,
-                                "description" to description,
-                                "county" to countyNumber.toString(),
-                                "geoPoint" to iconLocation,
-                                "validTimes" to validTimes
-                            )
+                        situationRecordList.add(
+                                FirestoreTrafficSituationRecord(
+                                        countyNumber,
+                                        description,
+                                        iconLocation,
+                                        header,
+                                        iconType,
+                                        overallEndTime,
+                                        overallStartTime,
+                                        validTimes
+                                )
                         )
                     }
                 }
+            }
+            situationRecordList.distinctBy { it.geoPoint }.forEach {
+                firestore.collection("traffic").add(it)
             }
         }
     }
