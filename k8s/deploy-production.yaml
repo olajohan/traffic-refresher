@@ -26,10 +26,6 @@ spec:
               secretKeyRef:
                 name: datex-secret
                 key: password
-        volumeMounts:
-          - name: secrets
-            mountPath: "/secrets/"
-            readOnly: true
       serviceAccount: backend-worker
 
 
