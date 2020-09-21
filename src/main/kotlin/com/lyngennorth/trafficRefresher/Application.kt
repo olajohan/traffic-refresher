@@ -16,7 +16,7 @@ open class Application
 
 fun main(args: Array<String>) {
 
-    val googleCreds = GoogleCredentials.fromStream(File("/secrets/gcloud-service-account").inputStream())
+    val googleCreds = GoogleCredentials.getApplicationDefault()
     val options = FirebaseOptions.builder()
         .setCredentials(googleCreds)
         .setProjectId("aurora-alarm")
