@@ -30,13 +30,7 @@ spec:
           - name: secrets
             mountPath: "/secrets/"
             readOnly: true
-      volumes:
-        - name: secrets
-          secret:
-            secretName: service-account-secret
-            items:
-              - key: service-account
-                path: gcloud-service-account
+      serviceAccount: backend-worker
 
 
 
